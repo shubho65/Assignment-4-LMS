@@ -17,16 +17,17 @@ namespace EFCoreDemo_1
             Console.Write("Please Enter Book Barcode : ");
             var BarCode = Console.ReadLine();
 
+            // get the issuebook instance with given student id and book barcode
             var b = context.IssueBook.Where(x => x.BookBarCode == BarCode && x.StudentId == Id).FirstOrDefault();
             var c = (DateTime.UtcNow - b.IssueDate).Days;
             var wk = 7;
             // get the student to udate his fine amount
             var sb = context.Students.Where(x => x.Id == Id).SingleOrDefault();
-            if (c > wk)
+            var diff = c - wk;
+            if (diff>0)
             {
-                var totalDelay = c - wk;
-                var finefordelay = totalDelay * 10;
-                sb.FineAmount = finefordelay;
+                var fineamount = diff * 10;
+                sb.FineAmount = fineamount;
                 Console.WriteLine("Fine Updated Successfully");
             }
             // get the book to udate remaigning copy count

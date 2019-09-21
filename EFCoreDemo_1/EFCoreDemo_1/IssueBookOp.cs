@@ -23,7 +23,7 @@ namespace EFCoreDemo_1
             {
 
                 var b = context.Books.Where(x => x.BarCode == BarCode).SingleOrDefault();
-                //if valid student id and book id an copy count greater than zero
+                //if valid student id and book id and copy count greater than zero
 
                 if (context.Students.Any(s => s.Id == Id) &&
                     context.Books.Any(bk => bk.BarCode == BarCode && bk.CopyCount > 0))
